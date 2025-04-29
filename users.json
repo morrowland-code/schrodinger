@@ -1,0 +1,44 @@
+[
+  {
+    "username": "admin",
+    "password": "$2b$10$kARZga4OwraggaOtqIIXJurB1tjcuu.vnLSI9JDQZeHLPZzE/knGC",
+    "balance": 2345,
+    "orders": [
+      {
+        "id": 1024,
+        "amount": 120
+      },
+      {
+        "id": 1023,
+        "amount": 64.5
+      },
+      {
+        "id": 1022,
+        "amount": 88
+      }
+    ]
+  },
+  {
+    "username": "jessica",
+    "password": "$2b$10$c2Sd45lqHyyP7dszTRDlZOU0.XXkSwG2ycGPyig5D7.gVSKRxh.xu",
+    "balance": 5200,
+    "orders": [
+      {
+        "id": 1030,
+        "amount": 300
+      },
+      {
+        "id": 1029,
+        "amount": 200.5
+      }
+    ]
+  },
+  {
+    "username": "schrodinger",
+    "password": "$2b$10$ykP50XIm2UxG8v.46zfF5uPMRYTfrDaURJDh3uiVPLFE38edmRCoC",
+    "balance": 0,
+    "revenue": 0,
+    "payoutPending": 0,
+    "orders": []
+  }
+]
