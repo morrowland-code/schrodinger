@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Upload Products - rebuildthat4u</title>
-    <link rel="stylesheet" href="style.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -42,13 +41,14 @@
         <h2>New Product Details</h2>
         <input type="text" id="name" placeholder="Product Name" required><br>
         <input type="number" id="price" placeholder="Price ($)" step="0.01" required><br>
-        <input type="text" id="image" placeholder="Image URL" required><br>
+        <input type="file" id="imageFile" accept="image/*" required><br>
         <button onclick="addProduct()">Add Product</button>
         <p id="message"></p>
     </div>
 
     <script>
-        const correctKey = "rebuildkey4u"; // <<<<< SET YOUR SECRET UPLOAD KEY
+        const correctKey = "rebuildkey4u"; // Admin upload password
+        const imgbbKey = "d9262e53baa544c4cf97b6b34bdd98c1"; // Your Imgbb key
 
         document.getElementById("loginForm").addEventListener("submit", function(e) {
             e.preventDefault();
@@ -64,17 +64,40 @@
         async function addProduct() {
             const name = document.getElementById("name").value;
             const price = document.getElementById("price").value;
-            const image = document.getElementById("image").value;
+            const imageFile = document.getElementById("imageFile").files[0];
 
+            if (!imageFile) {
+                document.getElementById("message").innerText = "Please select an image.";
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('image', imageFile);
+
+            // Upload image to imgbb
+            const imgbbRes = await fetch(`https://api.imgbb.com/1/upload?key=${imgbbKey}`, {
+                method: 'POST',
+                body: formData
+            });
+
+            const imgbbData = await imgbbRes.json();
+            if (!imgbbData.success) {
+                document.getElementById("message").innerText = "Image upload failed.";
+                return;
+            }
+
+            const imageUrl = imgbbData.data.url;
+
+            // Save product with image URL
             const res = await fetch('/add-product', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ name, price, image })
+                body: JSON.stringify({ name, price, image: imageUrl })
             });
 
             const data = await res.json();
-            document.getElementById("message").innerText = data.success 
-                ? "Product added successfully!" 
+            document.getElementById("message").innerText = data.success
+                ? "Product added successfully!"
                 : "Failed to add product.";
         }
     </script>
