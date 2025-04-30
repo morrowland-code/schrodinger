@@ -12,10 +12,12 @@
             padding: 20px;
         }
 
+
         h1 {
             color: #d63384;
             margin-bottom: 20px;
         }
+
 
         .product-list {
             display: flex;
@@ -23,6 +25,7 @@
             justify-content: center;
             gap: 20px;
         }
+
 
         .product-card {
             background: #ffe6f0;
@@ -34,9 +37,11 @@
             transition: transform 0.2s;
         }
 
+
         .product-card:hover {
             transform: scale(1.05);
         }
+
 
         .product-card img {
             width: 100%;
@@ -45,53 +50,18 @@
             border-radius: 12px;
         }
 
+
         .product-name {
             font-weight: bold;
             margin: 10px 0 5px;
             color: #cc3366;
         }
 
+
         .price {
             color: #555;
             margin-bottom: 10px;
         }
 
-        .buy-button {
-            background: #ff69b4;
-            color: white;
-            padding: 8px 16px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-        }
 
-        .buy-button:hover {
-            background: #ff85c1;
-        }
-    </style>
-</head>
-<body>
-    <h1>Our Products</h1>
-
-    <div id="products" class="product-list"></div>
-
-    <script>
-        async function loadProducts() {
-            const res = await fetch('/get-products');
-            const products = await res.json();
-
-            const container = document.getElementById('products');
-            container.innerHTML = products.map(product => `
-                <div class="product-card">
-                    <img src="${product.image}" alt="${product.name}">
-                    <div class="product-name">${product.name}</div>
-                    <div class="price">$${product.price.toFixed(2)}</div>
-                    <button class="buy-button">Buy Now</button>
-                </div>
-            `).join('');
-        }
-
-        loadProducts();
-    </script>
-</body>
-</html>
+        

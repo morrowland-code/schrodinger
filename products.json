@@ -1,1 +1,7 @@
-[]
+[
+    {
+      "name": "Apple",
+      "price": 1.99,
+      "image": "images/apple.jpg"
+    }
+  ]
